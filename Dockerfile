@@ -23,12 +23,12 @@ RUN chown -R lego:lego /var/spool/cron/crontabs/lego && chmod -R 640 /var/spool/
 COPY assets/*.sh /app/
 RUN chown -R lego:lego /app; \
     chmod -R 550 /app; \
-    chmod +x /app/*.sh; \
-    mkdir -p /letsencrypt
+    chmod +x /app/*.sh
 
 # This is the only signal from the docker host that appears to stop crond
 STOPSIGNAL SIGKILL
 
 # switch user and set entrypoint 
 USER lego
+RUN mkdir -p /letsencrypt
 ENTRYPOINT "/app/entrypoint.sh"
