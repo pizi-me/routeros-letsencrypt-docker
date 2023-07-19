@@ -1,7 +1,8 @@
 # Dockerfile: https://hub.docker.com/r/goacme/lego/
 FROM goacme/lego:latest
 
-RUN apk update && apk add --no-cache \
+RUN echo -e "http://nl.alpinelinux.org/alpine/v3.18/main\nhttp://nl.alpinelinux.org/alpine/v3.18/community" > /etc/apk/repositories && \
+    apk update && apk add --no-cache \
     # crond needs root, so install dcron and cap package and set the capabilities 
     # on dcron binary https://github.com/inter169/systs/blob/master/alpine/crond/README.md
     dcron libcap \
